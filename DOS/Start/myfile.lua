@@ -52,6 +52,47 @@ for i,j in pairs(filelist) do
         filelistname:addItem(j,colors.lightBlue,colors.black)
     end
 end
+
+--建立程序启动
+local function openProgram(path, title, x, y, w, h)
+    local pId = id
+    id = id + 1
+    local f = mainFrame:addMovableFrame()
+        :setSize(w or 40, h or 14)
+        :setPosition(x or math.random(2, 12), y or math.random(2, 8))
+
+        local w,h = f.getSize()
+
+        f:addPane()
+    :setSize(w,1)
+    :setBackground(colors.black)
+
+    f:addLabel()
+        :setSize(w, 1)
+        :setBackground(colors.black)
+        :setForeground(colors.white)
+        :setText(title)
+
+    f:addProgram()
+        :setSize(w, h)
+        :setPosition(1, 2)
+        :execute(path)
+
+    f:addButton()
+        :setSize(1, 1)
+        :setText("X")
+        :setBackground(colors.black)
+        :setForeground(colors.red)
+        :setPosition(w, 1)
+        :onClick(function()
+            f:remove()
+            processes[pId] = nil
+        end)
+    processes[pId] = f
+    return f
+end
+
+
 --建立打开文件夹函数
 path = {}
 path[0] = "..."
@@ -70,26 +111,28 @@ local function openfile(title)
     :setSize(51,19)
     :setPosition(1,1)
     
+    local w,h = miniscreen.getSize()
+
     local minifilelist = miniscreen:addList()
     :setBackground(colors.white)
     :setForeground(colors.black)
     :setPosition(1,2)
-    :setSize(50,18)
+    :setSize(w*50/51,h*18/19)
 
     local miniscrollbar = miniscreen:addScrollbar()
-    :setPosition(51,2)
-    :setSize(1,18)
+    :setPosition(w,2)
+    :setSize(1,h*18/19)
     :onChange(function (self,_,value)
     minifilelist:setOffset(0,value-1)
     end)
 
     miniscreen:addPane()
-    :setSize(51,1)
+    :setSize(w,1)
     :setBackground(colors.black)
 
     miniscreen:addLabel()
     :setPosition(2,1)
-    :setSize(51, 1)
+    :setSize(w, 1)
     :setBackground(colors.black)
     :setForeground(colors.white)
     :setText(title or "New Program")
@@ -100,7 +143,7 @@ local function openfile(title)
         :setText("X")
         :setBackground(colors.black)
         :setForeground(colors.red)
-        :setPosition(51, 1)
+        :setPosition(w, 1)
         :onClick(function()
             miniscrDDeen:remove()
             num = num-1
@@ -111,12 +154,16 @@ local function openfile(title)
             minifilelist:addItem(j,colors.white,colors.black)
         end
     end
-    minifilelist:addItem(usepath,colors.white,colors.black)
     minifilelist:onSelect(function (self,event,item)
-        if 
-        string.find(item.text,"%.") == nil
+        if string.find(item.text,"%.") == nil
         then
             openfile(item.text)
+        elseif string.find(item.text,"lua") ~= nil
+        then
+            openProgram(usepath.."/"..item.text,item.text)
+        elseif string.find(item.text,"nfp") ~= nil
+        then
+            shell.run('paint',usepath.."/"..item.text)
         end
     end)
     processes[pId] = miniscreen
