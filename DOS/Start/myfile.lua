@@ -88,8 +88,8 @@ end)
  --新建lua&nfp&txt
  local menu_run = mainFrame:addButton()
  :setText("NewLua&Nfp&Txt")
- :setPosition(10,2)
- :setSize(15,1)
+ :setPosition(13,2)
+ :setSize(14,1)
  :setBackground(colors.white)
  :setForeground(colors.black)
  :onClick(function (self,event,click,x,y)
@@ -123,7 +123,7 @@ end)
          :setText("OK")
          :onClick(function ()
              local str = str:getLines()
-             if string.find(str,"lua") ~= nil or string.find(str,"txt") ~= nil
+             if string.find(str[1],"lua") ~= nil or string.find(str[1],"txt") ~= nil
              then
                 shell.run("edit",str[1])
                 Newrun:close()
@@ -159,6 +159,79 @@ local scrollbar = mainFrame:addScrollbar()
 :setSize(1,17)
 :onChange(function (self,_,value)
     mainscreen:setOffset(0,value-1)
+end)
+
+--删除文件
+local menu_del = mainFrame:addButton()
+:setText("Del")
+:setPosition(32,2)
+:setSize(3,1)
+:setBackground(colors.white)
+:setForeground(colors.black)
+:onClick(function (self,event,click,x,y)
+    if(event == "mouse_click") and (click == 1) then
+        local pId = id
+        id = id + 1
+        local del = mainFrame:addMovableFrame()
+        :setSize(40,14)
+        :setPosition(math.random(2, 12),math.random(2, 8))
+
+        local w,h = del.getSize()
+
+        del:addLabel()
+        :setSize(w, 1)
+        :setBackground(colors.black)
+        :setForeground(colors.white)
+        :setText("Del")
+
+        local str = del:addTextfield()
+        :setPosition(1,2)
+        :setSize(40,1)
+        :setForeground(colors.black)
+        :setBackground(colors.white)
+        :addLine("Please input you want del file name.")
+
+        del:addButton()
+        :setPosition(19,8)
+        :setSize(2,1)
+        :setForeground(colors.black)
+        :setBackground(colors.red)
+        :setText("OK")
+        :onClick(function ()
+            local str = str:getLines()
+            if string.find(str[1],"DOS") == nil and string.find(str[1],"rom") == nil
+            then
+               shell.run("rm",str[1])
+               del:close()
+            end
+            del:close()
+        end)
+
+        del:addButton()
+        :setSize(1, 1)
+        :setText("X")
+        :setBackground(colors.black)
+        :setForeground(colors.red)
+        :setPosition(w, 1)
+        :onClick(function()
+            del:remove()
+            processes[pId] = nil
+        end)
+    processes[pId] = del
+    return del
+    end
+end)
+
+local mainscreen = mainFrame:addFrame()
+:setPosition(1,3)
+:setSize(50,17)
+:setBackground(colors.lightBlue)
+
+local scrollbar = mainFrame:addScrollbar()
+:setPosition(51,3)
+:setSize(1,17)
+:onChange(function (self,_,value)
+   mainscreen:setOffset(0,value-1)
 end)
 
 local filelistname = mainscreen:addList()
@@ -263,8 +336,8 @@ local function openfile(title)
      --新建lua&nfp&txt
  local menu_run = miniscreen:addButton()
  :setText("NewLua&Nfp&Txt")
- :setPosition(10,2)
- :setSize(15,1)
+ :setPosition(13,2)
+ :setSize(14,1)
  :setBackground(colors.white)
  :setForeground(colors.black)
  :onClick(function (self,event,click,x,y)
@@ -380,6 +453,68 @@ local menu_file = miniscreen:addButton()
     return NewFile
     end
 end)
+
+--删除文件
+local menu_del = miniscreen:addButton()
+:setText("Del")
+:setPosition(32,2)
+:setSize(3,1)
+:setBackground(colors.white)
+:setForeground(colors.black)
+:onClick(function (self,event,click,x,y)
+    if(event == "mouse_click") and (click == 1) then
+        local pId = id
+        id = id + 1
+        local del = miniscreen:addMovableFrame()
+        :setSize(40,14)
+        :setPosition(math.random(2, 12),math.random(2, 8))
+
+        local w,h = del.getSize()
+
+        del:addLabel()
+        :setSize(w, 1)
+        :setBackground(colors.black)
+        :setForeground(colors.white)
+        :setText("Del")
+
+        local str = del:addTextfield()
+        :setPosition(1,2)
+        :setSize(40,1)
+        :setForeground(colors.black)
+        :setBackground(colors.white)
+        :addLine("Please input you want del file name.")
+
+        del:addButton()
+        :setPosition(19,8)
+        :setSize(2,1)
+        :setForeground(colors.black)
+        :setBackground(colors.red)
+        :setText("OK")
+        :onClick(function ()
+            local str = str:getLines()
+            if string.find(str[1],"DOS") == nil and string.find(str[1],"rom") == nil
+            then
+               shell.run("rm",usepath.."/"..str[1])
+               del:close()
+            end
+            del:close()
+        end)
+
+        del:addButton()
+        :setSize(1, 1)
+        :setText("X")
+        :setBackground(colors.black)
+        :setForeground(colors.red)
+        :setPosition(w, 1)
+        :onClick(function()
+            del:remove()
+            processes[pId] = nil
+        end)
+    processes[pId] = del
+    return del
+    end
+end)
+
     miniscreen:addButton()
         :setSize(1, 1)
         :setText("X")
@@ -402,17 +537,32 @@ end)
             openfile(item.text)
         elseif string.find(item.text,"lua") ~= nil
         then
-            openProgram(usepath.."/"..item.text,item.text)
+            shell.run("edit",usepath.."/"..item.text)
         elseif string.find(item.text,"nfp") ~= nil
         then
             shell.run('paint',usepath.."/"..item.text)
+        elseif string.find(item.text,"txt") ~= nil
+        then
+            shell.run('edit',usepath.."/"..item.text)
         end
     end)
     processes[pId] = miniscreen
 end
 
 filelistname:onSelect(function (self,event,item)
-    openfile(item.text)
+    if string.find(item.text,"%.") == nil
+        then
+            openfile(item.text)
+        elseif string.find(item.text,"lua") ~= nil
+        then
+            shell.run("edit",item.text)
+        elseif string.find(item.text,"nfp") ~= nil
+        then
+            shell.run('paint',item.text)
+        elseif string.find(item.text,"txt") ~= nil
+        then
+            shell.run('edit',item.text)
+        end
 end)
 
 basalt.autoUpdate()
