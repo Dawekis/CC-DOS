@@ -246,46 +246,6 @@ for i,j in pairs(filelist) do
     end
 end
 
---建立程序启动
-local function openProgram(path, title, x, y, w, h)
-    local pId = id
-    id = id + 1
-    local f = mainFrame:addMovableFrame()
-        :setSize(w or 40, h or 14)
-        :setPosition(x or math.random(2, 12), y or math.random(2, 8))
-
-        local w,h = f.getSize()
-
-        f:addPane()
-    :setSize(w,1)
-    :setBackground(colors.black)
-
-    f:addLabel()
-        :setSize(w, 1)
-        :setBackground(colors.black)
-        :setForeground(colors.white)
-        :setText(title)
-
-    f:addProgram()
-        :setSize(w, h)
-        :setPosition(1, 2)
-        :execute(path)
-
-    f:addButton()
-        :setSize(1, 1)
-        :setText("X")
-        :setBackground(colors.black)
-        :setForeground(colors.red)
-        :setPosition(w, 1)
-        :onClick(function()
-            f:remove()
-            processes[pId] = nil
-        end)
-    processes[pId] = f
-    return f
-end
-
-
 --建立打开文件夹函数
 path = {}
 path[0] = "..."

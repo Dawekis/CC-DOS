@@ -221,23 +221,146 @@ end
 --注释：本页函数需要调用外部库“Basalt”，如果没有调用该库，该页函数报错
 
 ------------------------------------------全屏程序窗口---------------------------------------------
+--注释：cat.Basalt.Window_Over(重要框架变量，程序标题，背景颜色)
+--调用该函数时请将basalt.createFrame变量填入重要框架变量中，否则报错
+
 function cat.Basalt.Window_Over(mainFrame,title,Backgroundcolor)
-    mainFrame:setBackgroundColor(Backgroundcolor)
+    mainFrame:setBackground(Backgroundcolor):setForeground(colors.white)
     local upline = mainFrame:addPane()
     :setBackground(colors.black)
     :setSize(51,1)
     local menuline = mainFrame:addPane()
-    :setPosition(2,1)
-    :setBackground(colors.black)
+    :setPosition(1,2)
+    :setBackground(colors.white)
     :setSize(51,1)
     local title = mainFrame:addLabel()
     :setText(title)
+    local close = mainFrame:addButton()
+    :setPosition(51,1)
+    :setSize(1,1)
+    :setText("X")
     :setBackground(colors.black)
-    :setForeground(colors.white)
+    :setForeground(colors.red)
+    :onClick(function (self,event,click,x,y)
+        if(event == "mouse_click") and (click == 1) then
+            mainFrame:close()
+        end
+    end)
 end
 
+------------------------------------------自定义程序窗口---------------------------------------------
+--注释：cat.Basalt.Window_Mini(重要框架变量，程序标题，背景颜色)
+--调用该函数时请将Frame变量填入重要框架变量中，否则报错
 
+function cat.Basalt.Window_Set(Frame,title,Backgroundcolor,x,y,long,high)
+    Frame:setBackground(Backgroundcolor):setForeground(colors.white)
+    :setPosition(x or math.random(2,18),y or math.random(2,8))
+    :setSize(long or 40,high or 14)
+    local long,high = Frame:getSize()
+    local upline = Frame:addPane()
+    :setBackground(colors.black)
+    :setSize(long,1)
+    local title = Frame:addLabel()
+    :setText(title)
+    local close = Frame:addButton()
+    :setPosition(long,1)
+    :setSize(1,1)
+    :setText("X")
+    :setBackground(colors.black)
+    :setForeground(colors.red)
+    :onClick(function (self,event,click,x,y)
+        if(event == "mouse_click") and (click == 1) then
+            Frame:remove()
+        end
+    end)
+end
 
+------------------------添加文本按钮----------------------------------
+function cat.Basalt.Button_Text(Frame,x,y,str,Backgroundcolor,Textcolor,func)
+    local w = #str
+    Frame:addButton()
+    :setPosition(x,y)
+    :setText(str)
+    :setSize(w,1)
+    :setBackground(Backgroundcolor)
+    :setForeground(Textcolor)
+    :onClick(func)
+end
+
+------------------------添加滚动条---------------------------
+
+function cat.Basalt.Scrollbar(Frame,SubFrame,x,y,high)
+    local Scrollbar = Frame:addScrollbar()
+    :setPosition(x or 51,y or 3)
+    :setSize(1,high or 16)
+    :setScrollAmount(10)
+    :onChange(function (self,_,value)
+        SubFrame:setOffset(0,value-1)
+    end)
+end
+
+------------------------添加可选择列表----------------------------------
+
+function cat.Basalt.List(Frame,Backgroundcolor,Textcolor,x,y,long,high)
+    local w,h = Frame:getSize()
+    local List = Frame:addList()
+    :setPosition(x or 1,y or 1)
+    :setSize(long or 51,high or 17)
+    :setBackground(Backgroundcolor)
+    :setForeground(Textcolor)
+    return
+    List
+end
+
+------------------------添加文本输入框----------------------------------
+function cat.Basalt.Textfield(Frame,Backgroundcolor,Textcolor,str_table,x,y,long,high)
+    local Textfield = Frame:addTextfield()
+    :setPosition(x or 1,y or 2)
+    :setSize(long or 40,high or 1)
+    :setBackground(Backgroundcolor)
+    :setForeground(Textcolor)
+    for i = 1,#str_table do
+        Textfield:addLine(str_table[1])
+    end
+    local str_table = Textfield:getLines()
+    return
+    Textfield
+end
+
+------------------------运行程序----------------------------------
+local id = 1
+local processes = {}
+function cat.Basalt.OpenProgram(Frame,path, title, x, y, w, h)
+    local pId = id
+    id = id + 1
+    local f = Frame:addMovableFrame()
+        :setSize(w or 40, h or 14)
+        :setPosition(x or math.random(2, 12), y or math.random(2, 8))
+
+    f:addLabel()
+        :setSize(w or 40, 1)
+        :setBackground(colors.black)
+        :setForeground(colors.lightGray)
+        :setText(title or "New Program")
+
+    f:addProgram()
+        :setSize(w or 40, h or 14)
+        :setPosition(1, 2)
+        :execute(path or "rom/programs/shell.lua")
+
+    f:addButton()
+        :setSize(1, 1)
+        :setText("X")
+        :setBackground(colors.black)
+        :setForeground(colors.red)
+        :setPosition(w or 40, 1)
+        :onClick(function()
+            f:remove()
+            processes[pId] = nil
+        end)
+    processes[pId] = f
+    return f
+end
 
 --------------------------------------返回调用表cat----------------------------------------------------
 --注释：返回表cat，以便后续自定义变量调用cat模块
