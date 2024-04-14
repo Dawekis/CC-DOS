@@ -1,4 +1,4 @@
-local basalt = require("basalt")
+local basalt = require(".../DOS.script.basalt")
 local processes = {}
 local id = 1
 local mainFrame = basalt.createFrame()

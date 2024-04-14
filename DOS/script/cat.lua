@@ -19,7 +19,8 @@ cat = {
     Background = {},
     Line = {},
     Button = {},
-    File = {}
+    File = {},
+    Basalt = {}
 }
 
 --=============================================图形处理=============================================--
@@ -215,6 +216,29 @@ function cat.Button.Text(text,func,click_x,click_y,click)
         func()
     end
 end
+
+--=============================================Basalt处理=============================================--
+--注释：本页函数需要调用外部库“Basalt”，如果没有调用该库，该页函数报错
+
+------------------------------------------全屏程序窗口---------------------------------------------
+function cat.Basalt.Window_Over(mainFrame,title,Backgroundcolor)
+    mainFrame:setBackgroundColor(Backgroundcolor)
+    local upline = mainFrame:addPane()
+    :setBackground(colors.black)
+    :setSize(51,1)
+    local menuline = mainFrame:addPane()
+    :setPosition(2,1)
+    :setBackground(colors.black)
+    :setSize(51,1)
+    local title = mainFrame:addLabel()
+    :setText(title)
+    :setBackground(colors.black)
+    :setForeground(colors.white)
+end
+
+
+
+
 --------------------------------------返回调用表cat----------------------------------------------------
 --注释：返回表cat，以便后续自定义变量调用cat模块
 
