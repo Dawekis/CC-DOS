@@ -1,3 +1,4 @@
+shell.run("mkdir DOS/System/run")
 paintutils.drawFilledBox(1,1,51,19,colors.white)
 sleep(1)
 for i = 1,10 do

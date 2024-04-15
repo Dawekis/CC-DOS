@@ -1,4 +1,1 @@
-local basalt = require("basalt")
-local mainFrame = basalt.createFrame()
-shell.run("DOS/System/startup.lua")
-basalt.autoUpdate()
+shell.run("copy DOS/System/run.txt run.txt")

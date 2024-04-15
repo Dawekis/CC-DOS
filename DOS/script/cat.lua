@@ -24,6 +24,7 @@ cat = {
 }
 
 --=============================================图形处理=============================================--
+
 ------------------------------------------自定义窗口-----------------------------------------------
 --注释：cat.Background.Set(x轴位置，y轴位置，长，高，颜色(透明则填“”)，是否带框[blink]，是否带关闭图标[blink])
 
@@ -294,7 +295,7 @@ end
 function cat.Basalt.Scrollbar(Frame,SubFrame,x,y,high)
     local Scrollbar = Frame:addScrollbar()
     :setPosition(x or 51,y or 3)
-    :setSize(1,high or 16)
+    :setSize(1,high or 17)
     :setScrollAmount(10)
     :onChange(function (self,_,value)
         SubFrame:setOffset(0,value-1)

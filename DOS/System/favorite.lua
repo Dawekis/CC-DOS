@@ -15,6 +15,7 @@ for i = 1,#luaname do
     lualist:addItem(luaname[i])
 end
 lualist:onSelect(function (self,event,item)
+    shell.run("clear")
     shell.run("DOS/System/Favorite/"..item.text)
 end)
 --Add program
