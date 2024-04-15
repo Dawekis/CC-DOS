@@ -1,0 +1,12 @@
+local basalt = require(".../DOS.script.basalt")
+local cat = require(".../DOS.script.cat")
+local main = basalt.createFrame()
+local aList = main:addList()
+aList:addItem("Item 1")
+aList:addItem("Item 2", colors.yellow)
+aList:addItem("Item 3", colors.yellow, colors.green)
+
+aList:onSelect(function(self, event, item)
+  basalt.debug("Selected item: ", aList:getItemIndex())
+end)
+basalt.autoUpdate()

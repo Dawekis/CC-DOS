@@ -6,6 +6,7 @@ end
 while menu_runing == 1 do
     cat.Background.Set(1,1,51,19,colors.lightBlue,true)
     cat.Text(2,1,colors.orange,colors.black,"MainMenu - <1>")
+    cat.Background.Load(11,1,"DOS/Image/logo_0.nfp")
     --editmenu image
     cat.Text(51,1,colors.orange,colors.black,"+")
     cat.Text(1,10,colors.white,colors.black,"<")
@@ -19,8 +20,8 @@ while menu_runing == 1 do
     local FavoriteIcon = cat.Icon(1,11,"DOS/Image/Favorite.nfp")
     cat.Text(2,17,colors.black,colors.lightBlue,"Favorite")
     --cmd image
-    local CmdIcon = cat.Icon(12,2,"DOS/Image/Cmd.nfp")
-    cat.Text(16,8,colors.black,colors.lightBlue,"Cmd")
+    local CmdIcon = cat.Icon(13,2,"DOS/Image/Cmd.nfp")
+    cat.Text(17,8,colors.black,colors.lightBlue,"Cmd")
     --monitoring event:mouse_click
     local event,click,click_x,click_y = os.pullEvent("mouse_click")
     --myfile program
@@ -31,7 +32,7 @@ while menu_runing == 1 do
     cat.Button.Icon(FavoriteIcon,function ()
         shell.run("DOS/System/Favorite")
     end,click_x,click_y,click)
-    --favorite program
+    --cmd program
     cat.Button.Icon(CmdIcon,function ()
         shell.run("DOS/System/Cmd")
     end,click_x,click_y,click)

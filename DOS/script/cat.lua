@@ -320,8 +320,8 @@ function cat.Basalt.Textfield(Frame,Backgroundcolor,Textcolor,str_table,x,y,long
     local Textfield = Frame:addTextfield()
     :setPosition(x or 1,y or 2)
     :setSize(long or 40,high or 1)
-    :setBackground(Backgroundcolor)
-    :setForeground(Textcolor)
+    :setBackground(Backgroundcolor or colors.white)
+    :setForeground(Textcolor or colors.black)
     for i = 1,#str_table do
         Textfield:addLine(str_table[1])
     end

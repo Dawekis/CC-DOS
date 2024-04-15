@@ -3,7 +3,9 @@ local menu_runing = 0
 if fs.isDir("DOS/System/run") == true then
     menu_runing = 1
 end
+--tip
 while menu_runing == 1 do
+--test pine
     cat.Background.Set(1,1,51,19,colors.lightBlue,true)
 
 --menu title
@@ -25,6 +27,7 @@ while menu_runing == 1 do
 --Icon6
 --Icon7
 --Icon8
+--Image end
 
 --monitoring event:mouse_click
     local event,click,click_x,click_y = os.pullEvent("mouse_click")
