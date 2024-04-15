@@ -219,7 +219,7 @@ end
 
 --=============================================Basalt处理=============================================--
 --注释：本页函数需要调用外部库“Basalt”，如果没有调用该库，该页函数报错
-
+local basalt = require(".../DOS.script.basalt")
 ------------------------------------------全屏程序窗口---------------------------------------------
 --注释：cat.Basalt.Window_Over(重要框架变量，程序标题，背景颜色)
 --调用该函数时请将basalt.createFrame变量填入重要框架变量中，否则报错
@@ -243,9 +243,10 @@ function cat.Basalt.Window_Over(mainFrame,title,Backgroundcolor)
     :setForeground(colors.red)
     :onClick(function (self,event,click,x,y)
         if(event == "mouse_click") and (click == 1) then
-            mainFrame:close()
+            basalt.stop()
         end
     end)
+    basalt.update()
 end
 
 ------------------------------------------自定义程序窗口---------------------------------------------
@@ -273,6 +274,7 @@ function cat.Basalt.Window_Set(Frame,title,Backgroundcolor,x,y,long,high)
             Frame:remove()
         end
     end)
+    basalt.update()
 end
 
 ------------------------添加文本按钮----------------------------------
@@ -327,39 +329,42 @@ function cat.Basalt.Textfield(Frame,Backgroundcolor,Textcolor,str_table,x,y,long
     Textfield
 end
 
-------------------------运行程序----------------------------------
+-------------------------------------运行程序---------------------------------------
+--注释:若调用有关原版图形绘画的lua，退出程序后会导致所有父级程序丢失贴图[目前无解](覆盖绘画)！
 local id = 1
 local processes = {}
 function cat.Basalt.OpenProgram(Frame,path, title, x, y, w, h)
     local pId = id
     id = id + 1
-    local f = Frame:addMovableFrame()
+    local MovableScreen = Frame:addMovableFrame()
         :setSize(w or 40, h or 14)
         :setPosition(x or math.random(2, 12), y or math.random(2, 8))
 
-    f:addLabel()
+        MovableScreen:addLabel()
         :setSize(w or 40, 1)
         :setBackground(colors.black)
         :setForeground(colors.lightGray)
         :setText(title or "New Program")
 
-    f:addProgram()
+        local program = MovableScreen:addProgram()
         :setSize(w or 40, h or 14)
         :setPosition(1, 2)
         :execute(path or "rom/programs/shell.lua")
 
-    f:addButton()
+        MovableScreen:addButton()
         :setSize(1, 1)
         :setText("X")
         :setBackground(colors.black)
         :setForeground(colors.red)
         :setPosition(w or 40, 1)
         :onClick(function()
-            f:remove()
+            program:stop()
+            MovableScreen:remove()
             processes[pId] = nil
         end)
-    processes[pId] = f
-    return f
+    processes[pId] = MovableScreen
+    basalt.update()
+    return MovableScreen
 end
 
 --------------------------------------返回调用表cat----------------------------------------------------

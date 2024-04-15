@@ -1,4 +1,4 @@
-cat = require(".../DOS.script.cat")
+local cat = require(".../DOS.script.cat")
 menu_runing = 1
 while menu_runing == 1 do
     cat.Background.Set(1,1,51,19,colors.lightBlue,true)
@@ -50,6 +50,8 @@ while menu_runing == 1 do
         --Favorite
         cat.Button.Text(favorite,function ()
             shell.run("DOS/System/Favorite")
+            shell.exit()
+            menu_runing = 0
         end,click_x,click_y,click)
     end,click_x,click_y,click)
 end

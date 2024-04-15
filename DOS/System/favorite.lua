@@ -15,7 +15,7 @@ for i = 1,#luaname do
     lualist:addItem(luaname[i])
 end
 lualist:onSelect(function (self,event,item)
-    cat.Basalt.OpenProgram(mainFrame,"DOS/System/Favorite/"..item.text,item.text)
+    shell.run("DOS/System/Favorite/")
 end)
 --Add program
 cat.Basalt.Button_Text(mainFrame,1,2,"Add",colors.white,colors.black,function ()

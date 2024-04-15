@@ -24,7 +24,7 @@ local close = mainFrame:addButton()
 :setForeground(colors.red)
 :onClick(function (self,event,click,x,y)
     if(event == "mouse_click") and (click == 1) then
-        mainFrame:close()
+        basalt.stop()
     end
 end)
 
