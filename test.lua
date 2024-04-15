@@ -1,1 +1,0 @@
-shell.run("copy DOS/System/run.txt run.txt")

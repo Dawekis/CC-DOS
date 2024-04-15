@@ -4,11 +4,12 @@ if fs.isDir("DOS/System/run") == true then
     menu_runing = 1
 end
 while menu_runing == 1 do
-    
     cat.Background.Set(1,1,51,19,colors.lightBlue,true)
     cat.Text(2,1,colors.orange,colors.black,"MainMenu - <1>")
     --editmenu image
     cat.Text(51,1,colors.orange,colors.black,"+")
+    cat.Text(1,10,colors.white,colors.black,"<")
+    cat.Text(51,10,colors.white,colors.black,">")
     --menu image
     paintutils.drawPixel(1,19,colors.lime)
     --myfile image
@@ -37,6 +38,13 @@ while menu_runing == 1 do
     --menu program
     cat.Button.Set(1,19,1,1,function ()
         shell.run("DOS/System/menubutton")
+    end,click_x,click_y,click)
+    cat.Button.Set(51,1,1,1,function ()
+        shell.run("DOS/System/editmenu")
+    end,click_x,click_y,click)
+    --menuchange program
+    cat.Button.Set(51,10,1,1,function ()
+        shell.run("DOS/Menu/Main/2")
     end,click_x,click_y,click)
     if fs.isDir("DOS/System/run") ~= true then
         menu_runing = 0

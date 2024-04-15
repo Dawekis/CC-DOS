@@ -248,7 +248,7 @@ end
 
 --建立打开文件夹函数
 path = {}
-path[0] = "..."
+path[0] = ""
 num = 0
 local function openfile(title)
     usepath = path[0]
@@ -291,7 +291,7 @@ local function openfile(title)
     :setSize(w, 1)
     :setBackground(colors.black)
     :setForeground(colors.white)
-    :setText(title)
+    :setText("MyFile"..usepath)
 
      --新建lua&nfp&txt
  local menu_run = miniscreen:addButton()

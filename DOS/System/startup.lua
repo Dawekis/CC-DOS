@@ -35,5 +35,5 @@ for i = 2,18,1 do
     paintutils.drawLine(50,20-i,52-25/9*i,20-i,colors.lightBlue)
     sleep(0.1)
 end
-shell.run("DOS/Menu/1/menu_1")
+shell.run("DOS/Menu/Main/1")
 shell.exit()
