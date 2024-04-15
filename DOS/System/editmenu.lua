@@ -15,8 +15,8 @@ end
 --Add Menu program
 cat.Basalt.Button_Text(mainFrame,1,2,"Add",colors.white,colors.black,function ()
     local miniframe = mainFrame:addMovableFrame()
-    cat.Basalt.Window_Set(miniframe,"Add Menu",colors.black)
-    cat.Basalt.Button_Text(miniframe,19,8,"OK",colors.red,colors.black,function ()
+    cat.Basalt.Window_Set(miniframe,"Add Menu",colors.black,nil,nil,10,5)
+    cat.Basalt.Button_Text(miniframe,5,3,"OK",colors.red,colors.black,function ()
         local menuname = fs.list("DOS/Menu/Main")
         local newmenu = io.open("DOS/Menu/Main/"..tostring(#menuname+1)..".lua","w")
         newmenu:read("a")
@@ -43,8 +43,8 @@ end)
 --Remove Menu program
 cat.Basalt.Button_Text(mainFrame,10,2,"Rm",colors.white,colors.black,function ()
     local miniframe = mainFrame:addMovableFrame()
-    cat.Basalt.Window_Set(miniframe,"Remove Menu",colors.black)
-    cat.Basalt.Button_Text(miniframe,19,8,"OK",colors.red,colors.black,function ()
+    cat.Basalt.Window_Set(miniframe,"Rm Menu",colors.black,nil,nil,10,5)
+    cat.Basalt.Button_Text(miniframe,5,3,"OK",colors.red,colors.black,function ()
         menuname = fs.list("DOS/Menu/Main")
         if #menuname > 1 then
             shell.run("rm","DOS/Menu/"..tostring(#menuname))
