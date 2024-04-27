@@ -3,15 +3,9 @@ local menu_runing = 0
 if fs.isDir("DOS/System/run") == true then
     menu_runing = 1
 end
-cat.Background.Set(1,1,51,19,colors.lightBlue,true)
-cat.Text(6,6,colors.black,colors.lightBlue,"Use the left mouse button to drag the icon")
-cat.Text(4,7,colors.black,colors.lightBlue,"to the you want position")
-cat.Text(6,8,colors.black,colors.lightBlue,"After dragging with the left mouse button,")
-cat.Text(4,9,colors.black,colors.lightBlue,"the icon will automatically appear")
-cat.Text(6,11,colors.black,colors.lightBlue,"Drag with the right mouse button to")
-cat.Text(4,12,colors.black,colors.lightBlue,"end selecting icon position")
+--tip
 while menu_runing == 1 do
-    local event,click,click_x,click_y = os.pullEvent("mouse_drag")
+--test pine
     cat.Background.Set(1,1,51,19,colors.lightBlue,true)
 --menu title
     cat.Text(2,1,colors.orange,colors.black,"MainMenu - <2>")
@@ -88,14 +82,38 @@ end
 local Icon8 = cat.Icon(tonumber(lua_8[1]),tonumber(lua_8[2]),lua_8[4])
 cat.Text(tonumber(lua_8[1])+3,tonumber(lua_8[2])+7,colors.black,colors.lightBlue,lua_8[5])
 --Icon image
---luatest is occupied
---monitoring event:mouse_darg
-    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then
-        local myfileIcon = cat.Icon(click_x,click_y,"Icon.nfp")
-        cat.Text(click_x + 2,click_y + 7,colors.black,colors.lightBlue,"www")
-        local temp = io.open("DOS/temp/temp.txt","w");io.output(temp);io.write(click_x.."\n");io.write(click_y);io.close(temp)
-    elseif click == 2 then
+--luatest
+--monitoring event:mouse_click
+    local event,click,click_x,click_y = os.pullEvent("mouse_click")
+
+--============Icon program============--
+--luaprogram
+    cat.Button.Icon(Icon1,function ()shell.run(lua_1[3]) end,click_x,click_y,click)
+    cat.Button.Icon(Icon2,function ()shell.run(lua_2[3]) end,click_x,click_y,click)
+    cat.Button.Icon(Icon3,function ()shell.run(lua_3[3]) end,click_x,click_y,click)
+    cat.Button.Icon(Icon4,function ()shell.run(lua_4[3]) end,click_x,click_y,click)
+    cat.Button.Icon(Icon5,function ()shell.run(lua_5[3]) end,click_x,click_y,click)
+    cat.Button.Icon(Icon6,function ()shell.run(lua_6[3]) end,click_x,click_y,click)
+    cat.Button.Icon(Icon7,function ()shell.run(lua_7[3]) end,click_x,click_y,click)
+    cat.Button.Icon(Icon8,function ()shell.run(lua_8[3]) end,click_x,click_y,click)
+--============mainmenuprogram============--
+--menu program
+    cat.Button.Set(1,19,1,1,function ()
+        shell.run("DOS/System/menubutton")
+    end,click_x,click_y,click)
+--editmenu program
+    cat.Button.Set(51,1,1,1,function ()
+        shell.run("DOS/System/editmenu")
+    end,click_x,click_y,click)
+--menuchange program
+    cat.Button.Set(1,10,1,1,function ()
+        menu_runing = 0
+    end,click_x,click_y,click)
+    cat.Button.Set(51,10,1,1,function ()
+        shell.run("DOS/Menu/Main/3")
+    end,click_x,click_y,click)
+--monitoring menu whether close
+    if fs.isDir("DOS/System/run") ~= true then
         menu_runing = 0
     end
-    sleep(0.01)
 end
