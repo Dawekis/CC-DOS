@@ -22,6 +22,9 @@ while menu_runing == 1 do
     --cmd image
     local CmdIcon = cat.Icon(13,2,"DOS/Image/Cmd.nfp")
     cat.Text(17,8,colors.black,colors.lightBlue,"Cmd")
+    --setup image
+    local SetupIcon = cat.Icon(13,11,"DOS/Image/Seting.nfp")
+    cat.Text(16,17,colors.black,colors.lightBlue,"Setup")
     --monitoring event:mouse_click
     local event,click,click_x,click_y = os.pullEvent("mouse_click")
     --myfile program
@@ -35,6 +38,10 @@ while menu_runing == 1 do
     --cmd program
     cat.Button.Icon(CmdIcon,function ()
         shell.run("DOS/System/Cmd")
+    end,click_x,click_y,click)
+    --setup program
+    cat.Button.Icon(SetupIcon,function ()
+        shell.run("DOS/System/seting")
     end,click_x,click_y,click)
     --menu program
     cat.Button.Set(1,19,1,1,function ()

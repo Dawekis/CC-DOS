@@ -1,2 +1,1 @@
-# CC-DOS
-# CC-DOS
+# ComputerCraft DOS Image operating system

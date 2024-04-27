@@ -1,5 +1,0 @@
-34
-8.0
-DOS/System/myfile.lua
-Icon.nfp
-test
