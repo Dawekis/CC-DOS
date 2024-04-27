@@ -91,8 +91,8 @@ cat.Text(tonumber(lua_8[1])+3,tonumber(lua_8[2])+7,colors.black,colors.lightBlue
 --luatest is occupied
 --monitoring event:mouse_darg
     if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then
-        local myfileIcon = cat.Icon(click_x,click_y,"Icon.nfp")
-        cat.Text(click_x + 2,click_y + 7,colors.black,colors.lightBlue,"www")
+        local myfileIcon = cat.Icon(click_x,click_y,"Input you want edit lua Icon path in here")
+        cat.Text(click_x + 2,click_y + 7,colors.black,colors.lightBlue,"Input you want edit lua new name in here")
         local temp = io.open("DOS/temp/temp.txt","w");io.output(temp);io.write(click_x.."\n");io.write(click_y);io.close(temp)
     elseif click == 2 then
         menu_runing = 0
