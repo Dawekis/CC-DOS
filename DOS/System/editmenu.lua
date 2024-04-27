@@ -110,7 +110,6 @@ menulist:onSelect(function (self,event,item)
         luastr_1[2] = cat.Basalt.Textfield(sub[1],nil,nil,str_1,1,3,46)
         luastr_1[3] = cat.Basalt.Textfield(sub[1],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[1],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_1.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
@@ -120,7 +119,7 @@ menulist:onSelect(function (self,event,item)
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
                 tempmenu:write('        local myfileIcon = cat.Icon(click_x,click_y,'..'"'..luastr_1[2]:getLine(1)..'"'..')\n')
                 tempmenu:write('        cat.Text(click_x + 2,click_y + 7,colors.black,colors.lightBlue,'..'"'..luastr_1[3]:getLine(1)..'"'..')\n')
-                tempmenu:write('        local temp = io.open("DOS/temp/temp.txt","w");io.output(temp);io.write(click_x.."\\n");io.write(click_y);io.close(temp)')
+                tempmenu:write('        local temp = io.open("DOS/temp/temp.txt","w");io.output(temp);io.write(click_x.."\\n");io.write(click_y);io.close(temp)\n')
                 tempmenu:write("    elseif click == 2 then\n")
                 tempmenu:write("        menu_runing = 0\n")
                 tempmenu:write("    end\n")
@@ -137,9 +136,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_1.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")
@@ -165,12 +165,10 @@ menulist:onSelect(function (self,event,item)
         luastr_2[2] = cat.Basalt.Textfield(sub[2],nil,nil,str_1,1,3,46)
         luastr_2[3] = cat.Basalt.Textfield(sub[2],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[2],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_2.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
-                if i == "--Icon1" or i == "--Icon2" or i == "--Icon3" or i == "--Icon8" or
-                i == "--Icon4" or i == "--Icon5" or i == "--Icon6" or i == "--Icon7" then
+                if i == "--luatest" then
                 tempmenu:write(i.." is occupied\n")
                 tempmenu:write("--monitoring event:mouse_darg\n")
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
@@ -193,9 +191,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_2.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")
@@ -221,12 +220,10 @@ menulist:onSelect(function (self,event,item)
         luastr_3[2] = cat.Basalt.Textfield(sub[3],nil,nil,str_1,1,3,46)
         luastr_3[3] = cat.Basalt.Textfield(sub[3],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[3],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_3.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
-                if i == "--Icon1" or i == "--Icon2" or i == "--Icon3" or i == "--Icon8" or
-                i == "--Icon4" or i == "--Icon5" or i == "--Icon6" or i == "--Icon7" then
+                if i == "--luatest" then
                 tempmenu:write(i.." is occupied\n")
                 tempmenu:write("--monitoring event:mouse_darg\n")
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
@@ -249,9 +246,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_3.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")
@@ -277,12 +275,10 @@ menulist:onSelect(function (self,event,item)
         luastr_4[2] = cat.Basalt.Textfield(sub[4],nil,nil,str_1,1,3,46)
         luastr_4[3] = cat.Basalt.Textfield(sub[4],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[4],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_4.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
-                if i == "--Icon1" or i == "--Icon2" or i == "--Icon3" or i == "--Icon8" or
-                i == "--Icon4" or i == "--Icon5" or i == "--Icon6" or i == "--Icon7" then
+                if i == "--luatest" then
                 tempmenu:write(i.." is occupied\n")
                 tempmenu:write("--monitoring event:mouse_darg\n")
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
@@ -305,9 +301,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_4.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")
@@ -333,12 +330,10 @@ menulist:onSelect(function (self,event,item)
         luastr_5[2] = cat.Basalt.Textfield(sub[5],nil,nil,str_1,1,3,46)
         luastr_5[3] = cat.Basalt.Textfield(sub[5],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[5],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_5.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
-                if i == "--Icon1" or i == "--Icon2" or i == "--Icon3" or i == "--Icon8" or
-                i == "--Icon4" or i == "--Icon5" or i == "--Icon6" or i == "--Icon7" then
+                if i == "--luatest" then
                 tempmenu:write(i.." is occupied\n")
                 tempmenu:write("--monitoring event:mouse_darg\n")
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
@@ -361,9 +356,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_5.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")
@@ -389,12 +385,10 @@ menulist:onSelect(function (self,event,item)
         luastr_6[2] = cat.Basalt.Textfield(sub[6],nil,nil,str_1,1,3,46)
         luastr_6[3] = cat.Basalt.Textfield(sub[6],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[6],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_6.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
-                if i == "--Icon1" or i == "--Icon2" or i == "--Icon3" or i == "--Icon8" or
-                i == "--Icon4" or i == "--Icon5" or i == "--Icon6" or i == "--Icon7" then
+                if i == "--luatest" then
                 tempmenu:write(i.." is occupied\n")
                 tempmenu:write("--monitoring event:mouse_darg\n")
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
@@ -417,9 +411,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_6.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")
@@ -445,12 +440,10 @@ menulist:onSelect(function (self,event,item)
         luastr_7[2] = cat.Basalt.Textfield(sub[7],nil,nil,str_1,1,3,46)
         luastr_7[3] = cat.Basalt.Textfield(sub[7],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[7],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_7.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
-                if i == "--Icon1" or i == "--Icon2" or i == "--Icon3" or i == "--Icon8" or
-                i == "--Icon4" or i == "--Icon5" or i == "--Icon6" or i == "--Icon7" then
+                if i == "--luatest" then
                 tempmenu:write(i.." is occupied\n")
                 tempmenu:write("--monitoring event:mouse_darg\n")
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
@@ -473,9 +466,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_7.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")
@@ -501,12 +495,10 @@ menulist:onSelect(function (self,event,item)
         luastr_8[2] = cat.Basalt.Textfield(sub[8],nil,nil,str_1,1,3,46)
         luastr_8[3] = cat.Basalt.Textfield(sub[8],nil,nil,str_2,1,4,46)
         cat.Basalt.Button_Text(sub[8],11,1,"Add",colors.red,colors.black,function ()
-            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_8.txt","w")
             local tempmenu = io.open("DOS/temp/tempmenu.lua","w")
             tempmenu:read("a")
             for i in io.lines("DOS/Menu/Main/"..item.text) do
-                if i == "--Icon1" or i == "--Icon2" or i == "--Icon3" or i == "--Icon8" or
-                i == "--Icon4" or i == "--Icon5" or i == "--Icon6" or i == "--Icon7" then
+                if i == "--luatest" then
                 tempmenu:write(i.." is occupied\n")
                 tempmenu:write("--monitoring event:mouse_darg\n")
                 tempmenu:write("    if click_x <= 40 and click_x >= 2 and click_y <= 11 and click_y >= 2 and click == 1 then\n")
@@ -529,9 +521,10 @@ menulist:onSelect(function (self,event,item)
                     tempmenu:write(i.."\n")
                 end
             end
-            tempmenu:close()
+            io.close(tempmenu)
             shell.run("DOS/temp/tempmenu")
             shell.run("rm DOS/temp/tempmenu")
+            local config = io.open(".../DOS/Menu/"..menulist:getItemIndex().."/lua_8.txt","w")
             io.output(config)
             for i in io.lines("DOS/temp/temp.txt") do
                 io.write(i.."\n")

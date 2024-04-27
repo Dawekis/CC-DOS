@@ -15,10 +15,9 @@ while menu_runing == 1 do
     cat.Text(51,10,colors.white,colors.black,">")
 --menu image
     paintutils.drawPixel(1,19,colors.lime)
---luatest
 --lua config
 --Icon image
---Image end
+--luatest
 --monitoring event:mouse_click
     local event,click,click_x,click_y = os.pullEvent("mouse_click")
 
