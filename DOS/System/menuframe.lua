@@ -1,10 +1,6 @@
 local cat = require(".../DOS.script.cat")
-local menu_runing = 0
-if fs.isDir("DOS/System/run") == true then
-    menu_runing = 1
-end
 --tip
-while menu_runing == 1 do
+while true do
 --test pine
     cat.Background.Set(1,1,51,19,colors.lightBlue,true)
 --menu title
@@ -34,7 +30,4 @@ while menu_runing == 1 do
     end,click_x,click_y,click)
 --menuchange program
 --monitoring menu whether close
-    if fs.isDir("DOS/System/run") ~= true then
-        menu_runing = 0
-    end
 end

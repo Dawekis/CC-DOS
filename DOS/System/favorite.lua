@@ -28,8 +28,7 @@ cat.Basalt.Button_Text(mainFrame,1,2,"Add",colors.white,colors.black,function ()
         if fs.exists(str[1]) == true then
             shell.run("copy",str[1],"DOS/System/Favorite/"..fs.getName(str[1]))
             miniframe:remove()
-            lualist:addItem(str[1])
-            basalt.debug("Add success!","Please re-run Favorite to see you add lua.")
+            lualist:addItem(fs.getName(str[1]))
         else
             basalt.debug("No found "..str[1].."!")
         end
@@ -45,7 +44,6 @@ cat.Basalt.Button_Text(mainFrame,10,2,"Rm",colors.white,colors.black,function ()
         if fs.exists("DOS/System/Favorite/"..str[1]) == true then
             shell.run("rm","DOS/System/Favorite/"..str[1])
             miniframe:remove()
-            basalt.debug("Del success!","Please re-run Favorite to see you removed lua.")
             basalt.stop()
             shell.run("DOS/System/Favorite.lua")
         else
