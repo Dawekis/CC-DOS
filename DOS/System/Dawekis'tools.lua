@@ -12,6 +12,7 @@ cat.Basalt.Scrollbar(mainFrame,mainscreen)
 local toollist = cat.Basalt.List(mainscreen,colors.lightBlue,colors.black)
 
 toollist:addItem("Calculator")
+toollist:addItem("Curve fitting")
 
 toollist:onSelect(function (self,event,item)
     if toollist:getItemIndex() == 1 then
@@ -45,6 +46,8 @@ toollist:onSelect(function (self,event,item)
                 tip:addLabel():setPosition(3,4):setText("letters")
             end
         end)
+    elseif toollist:getItemIndex() == 2 then
+        shell.run("DOS/System/Dawekis'tools/curvefitting.lua")
     end
 end)
 basalt.autoUpdate()

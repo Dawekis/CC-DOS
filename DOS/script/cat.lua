@@ -291,15 +291,34 @@ function cat.Basalt.Button_Text(Frame,x,y,str,Backgroundcolor,Textcolor,func)
 end
 
 ------------------------添加滚动条---------------------------
-
-function cat.Basalt.Scrollbar(Frame,SubFrame,x,y,high)
+--注释：type里，"horizontal"为水平，nil为垂直
+function cat.Basalt.Scrollbar(Frame,SubFrame,type,x,y,long,longth,val_x,val_y)
     local Scrollbar = Frame:addScrollbar()
-    :setPosition(x or 51,y or 3)
-    :setSize(1,high or 17)
-    :setScrollAmount(10)
-    :onChange(function (self,_,value)
-        SubFrame:setOffset(0,value-1)
-    end)
+    local result = 0
+    if type == "horizontal" then
+        Scrollbar
+        :setPosition(x or 51,y or 3)
+        :setBarType("horizontal")
+        :setSize(long or 51,1)
+        :setScrollAmount(longth or 10)
+        :onChange(function (self,_,value)
+            SubFrame:setOffset(value-1,val_y)
+            result = value-1
+            return
+            result
+        end)
+    elseif type == nil then
+        Scrollbar
+        :setPosition(x or 51,y or 3)
+        :setSize(1,long or 17)
+        :setScrollAmount(longth or 10)
+        :onChange(function (self,_,value)
+            SubFrame:setOffset(val_x,value-1)
+            result = value-1
+            return
+            result
+        end)
+    end
 end
 
 ------------------------添加可选择列表----------------------------------
@@ -323,7 +342,7 @@ function cat.Basalt.Textfield(Frame,Backgroundcolor,Textcolor,str_table,x,y,long
     :setBackground(Backgroundcolor or colors.white)
     :setForeground(Textcolor or colors.black)
     for i = 1,#str_table do
-        Textfield:addLine(str_table[1])
+        Textfield:addLine(str_table[i])
     end
     local str_table = Textfield:getLines()
     return

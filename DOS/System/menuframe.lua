@@ -1,6 +1,7 @@
 local cat = require(".../DOS.script.cat")
+local menu_runing = 1
 --tip
-while true do
+while menu_runing == 1 do
 --test pine
     cat.Background.Set(1,1,51,19,colors.lightBlue,true)
 --menu title
