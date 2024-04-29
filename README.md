@@ -1,1 +1,1 @@
-# ComputerCraft DOS Image operating system
+# CC: Tweaked DOS Image operating system
