@@ -15,9 +15,12 @@ j = 1
 str_2[1] = str_1[2]
 str_3[1] = str_1[3]
 str_4[1] = str_1[4]
-mainFrame:addLabel():setText("Max data:"):setPosition(1,2):setForeground(colors.black)
-mainFrame:addLabel():setText("Min data:"):setPosition(18,2):setForeground(colors.black)
-mainFrame:addLabel():setText("Up limit:"):setPosition(34,2):setForeground(colors.black)
+local Max_data_label = mainFrame:addLabel():setText("Max data:"):setPosition(1,2):setForeground(colors.black)
+local Min_data_label = mainFrame:addLabel():setText("Min data:"):setPosition(18,2):setForeground(colors.black)
+local Up_limit_label = mainFrame:addLabel():setText("Up limit:"):setPosition(34,2):setForeground(colors.black)
+local Max_data = mainFrame:addLabel():setText(""):setPosition(10,2):setForeground(colors.black)
+local Min_data = mainFrame:addLabel():setText(""):setPosition(27,2):setForeground(colors.black)
+local Up_limit = mainFrame:addLabel():setText(""):setPosition(43,2):setForeground(colors.black)
 local sidebar = mainFrame:addFrame():setBackground(colors.lightGray):setPosition(-28,3):setSize(30,16):setZIndex(25)
 :onGetFocus(function(self)
     self:setPosition(1)
@@ -65,7 +68,7 @@ sidebar:addLabel():setText("Up limit:"):setPosition(2,8)
 local uplimit = cat.Basalt.Textfield(sidebar,colors.white,colors.black,str_4,21,8,9,1)
 cat.Basalt.Button_Text(sidebar,14,11,"OK",colors.red,colors.black,function ()
     local j = 1
-    local updata = io.open("DOS/UserData Curve fitting/Curve_fitting_config.txt","w")
+    local updata = io.open("DOS/UserData/Curve fitting/Curve_fitting_config.txt","w")
     io.output(updata)
     local str = {}
     str[1] = pnum:getLine(1)
@@ -94,9 +97,12 @@ basalt.onEvent(function(event, side, channel, replyChannel, message, distance)
         end
         j = j + 1
     end
-    mainFrame:addLabel():setText(tostring(max)):setPosition(10,2):setForeground(colors.black)
-    mainFrame:addLabel():setText(tostring(min)):setPosition(27,2):setForeground(colors.black)
-    mainFrame:addLabel():setText(aGraph:getMaxValue()):setPosition(43,2):setForeground(colors.black)
+    Max_data_label:setText("Max data:")
+    Min_data_label:setText("Min data:")
+    Up_limit_label:setText("Up_limit:")
+    Max_data:setText(tostring(max))
+    Min_data:setText(tostring(min))
+    Up_limit:setText(aGraph:getMaxValue())
     Scrollbar_x:setScrollAmount((tonumber(xy:getLine(1)) or 3.1)*16*(tonumber(zoom:getLine(1)) or 1)-mainscreen_x)
     Scrollbar_y:setScrollAmount(16*(tonumber(zoom:getLine(1)) or 1)-mainscreen_y)
 end)
