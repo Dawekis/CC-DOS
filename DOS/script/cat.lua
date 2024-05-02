@@ -330,6 +330,7 @@ function cat.Basalt.List(Frame,Backgroundcolor,Textcolor,x,y,long,high)
     :setSize(long or 51,high or 17)
     :setBackground(Backgroundcolor)
     :setForeground(Textcolor)
+    :setScrollable(true)
     return
     List
 end

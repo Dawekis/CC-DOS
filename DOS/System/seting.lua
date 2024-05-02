@@ -58,7 +58,7 @@ setlist:onSelect(function (self,event,item)
                 else
                     monitorname[monitorlist:getItemIndex()].setTextScale(c)
                     tip:remove()
-                    shell.run("bg","monitor",item.text,".../DOS/System/startup.lua")
+                    shell.run("bg monitor",item.text,".../DOS/System/startup.lua")
                 end
             end)
         end)
